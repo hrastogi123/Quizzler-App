@@ -27,16 +27,15 @@ class QuizPage extends StatefulWidget {
 }
 
 class _QuizPageState extends State<QuizPage> {
-  List<Icon> scoreKeeper = [
-    Icon(
-      Icons.check,
-      color: Colors.green,
-    ),
-    Icon(
-      Icons.close,
-      color: Colors.red,
-    ),
+  List<Icon> scoreKeeper = [];
+  List<String> questions = [
+    'This is first Question',
+    'This is second Question',
+    'This is third Question'
   ];
+  List<bool> answers = [false, true, false];
+  int questionNumber = 0;
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -49,7 +48,7 @@ class _QuizPageState extends State<QuizPage> {
             padding: EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                'This is first question?',
+                questions[questionNumber],
                 style: TextStyle(
                   fontSize: 25.0,
                   color: Colors.white,
@@ -72,14 +71,21 @@ class _QuizPageState extends State<QuizPage> {
                   ),
                 ),
                 onPressed: () {
+                  bool correctAnswer = answers[questionNumber];
+                  if(correctAnswer == true){
+                    print('user got it right!');
+                  }else{
+                    print('user got it wrong!');
+                  }
                   setState(
                     () {
-                      scoreKeeper.add(
+                      questionNumber++;
+                      /*scoreKeeper.add(
                         Icon(
                           Icons.check,
                           color: Colors.green,
                         ),
-                      );
+                      );*/
                     },
                   );
                 },
@@ -98,7 +104,17 @@ class _QuizPageState extends State<QuizPage> {
                   color: Colors.white,
                 ),
               ),
-              onPressed: () {},
+              onPressed: () {
+                bool correctAnswer = answers[questionNumber];
+                if(correctAnswer == false){
+                  print('user got it right!');
+                }else{
+                  print('user got it wrong!');
+                }
+                setState(() {
+                  questionNumber++;
+                });
+              },
             ),
           ),
         ),
