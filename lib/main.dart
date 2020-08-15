@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'QnA.dart';
 void main() {
   runApp(Quizzler());
 }
@@ -28,12 +28,11 @@ class QuizPage extends StatefulWidget {
 
 class _QuizPageState extends State<QuizPage> {
   List<Icon> scoreKeeper = [];
-  List<String> questions = [
-    'This is first Question',
-    'This is second Question',
-    'This is third Question'
+  List<Question_Answer> bank = [
+    Question_Answer(q:'This is first Question', a: false),
+    Question_Answer(q: 'This is second Question', a: true),
+    Question_Answer(q: 'This is third Question', a: false),
   ];
-  List<bool> answers = [false, true, false];
   int questionNumber = 0;
 
   @override
@@ -48,7 +47,7 @@ class _QuizPageState extends State<QuizPage> {
             padding: EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                questions[questionNumber],
+                bank[questionNumber].questionsText,
                 style: TextStyle(
                   fontSize: 25.0,
                   color: Colors.white,
@@ -71,7 +70,7 @@ class _QuizPageState extends State<QuizPage> {
                   ),
                 ),
                 onPressed: () {
-                  bool correctAnswer = answers[questionNumber];
+                  bool correctAnswer = bank[questionNumber].answers;
                   if(correctAnswer == true){
                     print('user got it right!');
                   }else{
@@ -105,7 +104,7 @@ class _QuizPageState extends State<QuizPage> {
                 ),
               ),
               onPressed: () {
-                bool correctAnswer = answers[questionNumber];
+                bool correctAnswer = bank[questionNumber].answers;
                 if(correctAnswer == false){
                   print('user got it right!');
                 }else{
