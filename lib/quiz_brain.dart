@@ -25,4 +25,15 @@ class QuizBrain {
   bool getCorrectAns(){
     return _bank[_questionNumber].answers;
   }
+
+  bool isFinished() {
+    if (_questionNumber >= _bank.length - 1) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  void reset() {
+    _questionNumber = 0;
+  }
 }
