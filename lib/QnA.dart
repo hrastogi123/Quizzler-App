@@ -12,3 +12,4 @@ class Question_Answer{
 
   //End of Constructor
 }
+//Question_Answer newQuestion = Question_Answer(q: '', a: );

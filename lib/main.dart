@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'QnA.dart';
+import 'quiz_brain.dart';
+
+QuizBrain quizBrain = QuizBrain();
+
 void main() {
   runApp(Quizzler());
 }
@@ -28,12 +31,6 @@ class QuizPage extends StatefulWidget {
 
 class _QuizPageState extends State<QuizPage> {
   List<Icon> scoreKeeper = [];
-  List<Question_Answer> bank = [
-    Question_Answer(q:'This is first Question', a: false),
-    Question_Answer(q: 'This is second Question', a: true),
-    Question_Answer(q: 'This is third Question', a: false),
-  ];
-  int questionNumber = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +44,7 @@ class _QuizPageState extends State<QuizPage> {
             padding: EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                bank[questionNumber].questionsText,
+                quizBrain.getQuestionText(),
                 style: TextStyle(
                   fontSize: 25.0,
                   color: Colors.white,
@@ -70,7 +67,7 @@ class _QuizPageState extends State<QuizPage> {
                   ),
                 ),
                 onPressed: () {
-                  bool correctAnswer = bank[questionNumber].answers;
+                  bool correctAnswer = quizBrain.getCorrectAns();
                   if(correctAnswer == true){
                     print('user got it right!');
                   }else{
@@ -78,7 +75,7 @@ class _QuizPageState extends State<QuizPage> {
                   }
                   setState(
                     () {
-                      questionNumber++;
+                      quizBrain.nextQuestion();
                       /*scoreKeeper.add(
                         Icon(
                           Icons.check,
@@ -104,14 +101,14 @@ class _QuizPageState extends State<QuizPage> {
                 ),
               ),
               onPressed: () {
-                bool correctAnswer = bank[questionNumber].answers;
+                bool correctAnswer = quizBrain.getCorrectAns();
                 if(correctAnswer == false){
                   print('user got it right!');
                 }else{
                   print('user got it wrong!');
                 }
                 setState(() {
-                  questionNumber++;
+                  quizBrain.nextQuestion();
                 });
               },
             ),
